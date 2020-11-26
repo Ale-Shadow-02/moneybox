@@ -15,40 +15,40 @@
 </head>
 
 <body>
+  <header class="header">
+    <button class="add__form">Добавить цель
+    </button>
+  </header>
   <div class="container">
-    <header class="header">
-      <div class="button">
-        <a href="#" class="button__link">Добавить цель</a>
-      </div>
-    </header>
-    <form action="#" class="form">
+    <div class="form" id="1">
       <label class="form__label">
         Название цели
-        <input type="text" name="name" class="form__input" />
+        <input type="text" class="form__input name" />
       </label>
       <label class="form__label">
         Требуемая сумма
-        <input type="number" name="number" class="form__input" />
+        <input type="number" class="form__input number" />
       </label>
       <label class="form__label">
         Срок накопления
-        <input type="date" name="date" class="form__input" />
+        <input type="date" class="form__input date" />
       </label>
       <label class="form__label">
         Стартовая сумма
-        <input type="number" name="start_amount" class="form__input" />
+        <input type="number" class="form__input start_amount" />
       </label>
       <label class="form__label">
         Процент по вкладу
-        <input type="number" name="percent" class="form__input percent__input" />
+        <input type="number" class="form__input percent__input" />
         <span class="percent">%</span>
       </label>
       <label class="form__label">
         Ежемесячное пополнение
-        <input type="text" name="month_amount" class="form__input" readonly />
+        <input type="text" class="form__input month_amount" readonly />
       </label>
-
-    </form>
+      <button class="form__delete">Удалить цель
+      </button>
+    </div>
   </div>
 
 
