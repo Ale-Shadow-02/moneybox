@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moneybox</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="button">
+        <a href="#" class="button__link">Добавить цель</a>
+      </div>
+    </header>
+    <form action="#" class="form">
+      <label class="form__label">
+        Название цели
+        <input type="text" name="name" class="form__input" />
+      </label>
+      <label class="form__label">
+        Требуемая сумма
+        <input type="number" name="number" class="form__input" />
+      </label>
+      <label class="form__label">
+        Срок накопления
+        <input type="date" name="date" class="form__input" />
+      </label>
+      <label class="form__label">
+        Стартовая сумма
+        <input type="number" name="start_amount" class="form__input" />
+      </label>
+      <label class="form__label">
+        Процент по вкладу
+        <input type="number" name="percent" class="form__input percent__input" />
+        <span class="percent">%</span>
+      </label>
+      <label class="form__label">
+        Ежемесячное пополнение
+        <input type="text" name="month_amount" class="form__input" readonly />
+      </label>
+
+    </form>
+  </div>
+
+
+  <script src="./js/app.js"></script>
+</body>
+
+</html>

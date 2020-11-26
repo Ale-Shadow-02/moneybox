@@ -1,0 +1,28 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color:rgba(236, 226, 226, 0.5);
+  padding: 50px 0px 0px 0px;
+}
+
+.container {
+  margin: 0px auto;
+  width: 800px;
+}
+
+.button {
+  text-align: center;
+}
+.form {
+  max-width: 700px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input {
+  display: block;
+}
+
+
+  
+
