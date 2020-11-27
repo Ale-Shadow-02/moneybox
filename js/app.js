@@ -23,8 +23,8 @@ let monthAmount;
 
 //Обработчик need Input
 const needHandler = () =>{
-    needInputAll.forEach(needInput =>{
-        needInput.addEventListener('input', event =>{
+    needInputAll.forEach(needInput => {
+        needInput.addEventListener('input', event => {
             const number = (((event.target.parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
@@ -45,9 +45,8 @@ const needHandler = () =>{
 const dateHandler = () =>{
     dateInputAll.forEach(dateInput =>{
         dateInput.addEventListener('input', (event) => {
-            console.log(dateInput.value);
             daysToTarget(dateInput)
-            const number = ((event.target.parentElement).parentElement).parentElement.getAttribute("id");
+            const number = ((((event.target.parentElement).parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -59,8 +58,6 @@ const dateHandler = () =>{
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
-
-            console.log(monthAmount);
         });
     })
 }
@@ -70,7 +67,6 @@ const startHandler = () =>{
     startInputAll.forEach(startInput =>{
         startInput.addEventListener('input', event=>{
             const number = (((event.target.parentElement).parentElement).parentElement).parentElement.getAttribute("id");
-            console.log('number', number);
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -90,7 +86,7 @@ const startHandler = () =>{
 const percentPercent = () =>{
     percentInputAll.forEach(percentInput =>{
         percentInput.addEventListener('input', event =>{
-            const number = (((event.target.parentElement).parentElement).parentElement).parentElement.getAttribute("id");
+            const number = ((((event.target.parentElement).parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -152,8 +148,8 @@ addForm.addEventListener('click', () => {
 const daysToTarget = (dateInput) => {
     let different = 1 + ((new Date(dateInput.value) - new Date()) / 86400000);
     differentDays = Number(different.toFixed());
-    console.log(differentDays);
     dateTarget = Math.floor(differentDays/30);
+    //'Выберите срок накопления от 1 месяца и больше';
     return differentDays;
 }    
 //вычисление суммы ежемесячного пополнения с учетом капитализации
@@ -165,7 +161,38 @@ const getMonthAmount = (start, percent, iteration, final) =>{
             start = start * percent;
         }    
         monthAmount = (final - start) / percentFinal;
-        monthInput.value = monthAmount.toFixed(2);
-        return monthAmount;
+        if (differentDays < 30) {
+            monthInput.value = 'Доступный срок от 1 месяца'; 
+            console.log(monthInput.value);     
+        } else {
+            monthInput.value = monthAmount.toFixed(2);
+        }
 }        
 
+function getNewMonths(need, start, percent, amount) {
+    if (!Number(amount)) return; 
+    let current = 0;
+    let count = 0;
+    let sum = 0;
+    console.log('внутри',Number(current) )
+    do {
+        start = start * ((percent / 100 / 12) + 1);
+        current = (Number(current) + Number(amount)) * ((percent / 100 / 12) + 1);
+        //console.log("число на процент", current);
+        //current += Number(amount);
+        sum = current + start;
+        //console.log('sum', sum);
+        count++;
+    } while (sum < need);
+    
+    console.log('sum1111', sum);
+    console.log('date', new Date(new Date().getTime() + (86400 * 30 * 1000 * count)));
+    dateInput.value = new Date(new Date().getTime() + (86400 * 30 * 1000 * count)).toISOString().slice(0,10);
+    return count;
+};
+
+monthInput.addEventListener('input', event => {
+    monthAmount = monthInput.value;
+    console.log('инпут', monthAmount);
+    console.log('счетчик', getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount));
+})
