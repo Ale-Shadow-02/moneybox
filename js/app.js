@@ -14,13 +14,24 @@ let addForm = document.querySelector('.add__form');
 let container = document.querySelector('.container');
 let differentDays = 1;
 let formContent = form.innerHTML;
-let num = "a";
+let num = 1;
 let needAmount;
 let dateTarget;
 let startAmount;
 let percentAmount;
 let monthAmount;
 
+needInput.value = localStorage.getItem("needAmount");
+startInput.value = localStorage.getItem("startAmount");
+percentInput.value = localStorage.getItem("percentAmount");
+dateInput.value = localStorage.getItem("dateTarget");
+
+const updateVarLocalStorage = () =>{
+    localStorage.setItem("needAmount",needAmount)
+    localStorage.setItem("startAmount",startAmount)
+    localStorage.setItem("percentAmount",percentAmount)
+    localStorage.setItem("dateTarget",dateInput.value)
+}
 //Обработчик need Input
 const needHandler = () =>{
     needInputAll.forEach(needInput => {
@@ -36,6 +47,7 @@ const needHandler = () =>{
             startAmount= startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
     });
@@ -57,6 +69,7 @@ const dateHandler = () =>{
             startAmount= startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
     })
@@ -76,7 +89,9 @@ const startHandler = () =>{
             needAmount = needInput.value;
             startAmount= startInput.value;
             percentAmount = percentInput.value;
-            daysToTarget(dateInput)
+            
+            daysToTarget(dateInput);
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
     })
@@ -97,6 +112,7 @@ const percentPercent = () =>{
             startAmount= startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
     })
@@ -112,16 +128,17 @@ percentPercent();
 function addNewForm() {
     const divForm = document.createElement('div');
     divForm.classList.add('form');
-    divForm.setAttribute("id", num);
+    divForm.setAttribute("id", 'form-'+num);
     divForm.innerHTML = formContent;
-    container.append(divForm);
-    num +="a";
+    container.prepend(divForm);
+    num++;
     let formDeleteButtons = document.querySelectorAll('.form__delete');
     formDeleteButtons.forEach(element => {
         element.addEventListener('click', (e) => {
             e.target.parentElement.remove();
         })    
-    });    
+    }); 
+
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
     startInputAll = document.querySelectorAll('.start_amount');
@@ -195,4 +212,5 @@ monthInput.addEventListener('input', event => {
     monthAmount = monthInput.value;
     console.log('инпут', monthAmount);
     console.log('счетчик', getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount));
+    getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount)
 })
