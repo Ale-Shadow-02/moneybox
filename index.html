@@ -20,31 +20,40 @@
   </header>
   <div class="container">
     <div class="form" id="1">
-      <label class="form__label">
-        Название цели
-        <input type="text" class="form__input name" />
-      </label>
-      <label class="form__label">
-        Требуемая сумма
-        <input type="number" class="form__input need_amount" />
-      </label>
-      <label class="form__label">
-        Срок накопления
-        <input type="date" class="form__input date" />
-      </label>
-      <label class="form__label">
-        Стартовая сумма
-        <input type="number" class="form__input start_amount" />
-      </label>
-      <label class="form__label">
-        Процент по вкладу
-        <input type="number" class="form__input percent__input" />
-        <span class="percent">%</span>
-      </label>
-      <label class="form__label">
-        Ежемесячное пополнение
-        <input type="text" class="form__input month_amount" readonly />
-      </label>
+      <div class="form__wrap--bg">
+        <div class="form__top">
+          <h1 class="form__top--title">копилка</h1>
+          <img src="images/form-top-img.png" alt="TOP-IMG" class="form__top--icon">
+          <img src="images/logo.svg" alt="TOP-IMG" class="form__top--logo">
+          <label class="form__label">
+            <input type="text" class="form__input name" placeholder="Создать цель" />
+          </label>
+        </div>
+        <div class="form__wrap">
+          <label class="form__label">
+            Требуемая сумма
+            <input type="number" class="form__input need_amount" placeholder="0 RUB" />
+          </label>
+          <label class="form__label">
+            Стартовая сумма
+            <input type="number" class="form__input start_amount" placeholder="0 RUB" />
+          </label>
+          <div class="form__wrap--percent">
+            <label class="form__label">
+              Срок накопления
+              <input type="date" class="form__input date" placeholder="дд.мм.гггг" />
+            </label>
+            <label class="form__label">
+              Годовой %
+              <input type="number" class="form__input percent__input" placeholder="0 %" />
+            </label>
+          </div>
+          <label class="form__label">
+            Ежемесячное пополнение
+            <input type="text" class="form__input month_amount" readonly />
+          </label>
+        </div>
+      </div>
       <button class="form__delete">Удалить цель</button>
     </div>
   </div>
