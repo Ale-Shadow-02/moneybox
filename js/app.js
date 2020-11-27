@@ -153,6 +153,7 @@ const daysToTarget = (dateInput) => {
     differentDays = Number(different.toFixed());
     console.log(differentDays);
     dateTarget = Math.floor(differentDays/30);
+    //'Выберите срок накопления от 1 месяца и больше';
     return differentDays;
 }    
 //вычисление суммы ежемесячного пополнения с учетом капитализации
@@ -164,7 +165,11 @@ const getMonthAmount = (start, percent, iteration, final) =>{
             start = start * percent;
         }    
         monthAmount = (final - start) / percentFinal;
-        monthInput.value = monthAmount.toFixed(2);
-        return monthAmount;
+        if (differentDays < 30) {
+            monthInput.value = 'Доступный срок от 1 месяца'; 
+            console.log(monthInput.value);     
+        } else {
+            monthInput.value = monthAmount.toFixed(2);
+        }
 }        
 
