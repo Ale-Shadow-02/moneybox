@@ -23,9 +23,9 @@ let monthAmount;
 
 //Обработчик need Input
 const needHandler = () =>{
-    needInputAll.forEach(needInput =>{
-        needInput.addEventListener('input', event =>{
-            const number = (event.target.parentElement).parentElement.getAttribute("id");
+    needInputAll.forEach(needInput => {
+        needInput.addEventListener('input', event => {
+            const number = (((event.target.parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -47,7 +47,7 @@ const dateHandler = () =>{
         dateInput.addEventListener('input', (event) => {
             console.log(dateInput.value);
             daysToTarget(dateInput)
-            const number = (event.target.parentElement).parentElement.getAttribute("id");
+            const number = ((((event.target.parentElement).parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -69,7 +69,7 @@ const dateHandler = () =>{
 const startHandler = () =>{
     startInputAll.forEach(startInput =>{
         startInput.addEventListener('input', event=>{
-            const number = (event.target.parentElement).parentElement.getAttribute("id");
+            const number = (((event.target.parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
@@ -89,7 +89,7 @@ const startHandler = () =>{
 const percentPercent = () =>{
     percentInputAll.forEach(percentInput =>{
         percentInput.addEventListener('input', event =>{
-            const number = (event.target.parentElement).parentElement.getAttribute("id");
+            const number = ((((event.target.parentElement).parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
             dateInput = document.querySelector(`#${number} .date`);
             startInput = document.querySelector(`#${number} .start_amount`);
