@@ -45,7 +45,6 @@ const needHandler = () => {
 const dateHandler = () => {
     dateInputAll.forEach(dateInput => {
         dateInput.addEventListener('input', (event) => {
-            console.log(dateInput.value);
             daysToTarget(dateInput)
             const number = ((((event.target.parentElement).parentElement).parentElement).parentElement).parentElement.getAttribute("id");
             needInput = document.querySelector(`#${number} .need_amount`);
@@ -59,8 +58,6 @@ const dateHandler = () => {
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
-
-            console.log(monthAmount);
         });
     })
 }
@@ -151,7 +148,6 @@ addForm.addEventListener('click', () => {
 const daysToTarget = (dateInput) => {
     let different = 1 + ((new Date(dateInput.value) - new Date()) / 86400000);
     differentDays = Number(different.toFixed());
-    console.log(differentDays);
     dateTarget = Math.floor(differentDays / 30);
     //'Выберите срок накопления от 1 месяца и больше';
     return differentDays;
@@ -172,3 +168,23 @@ const getMonthAmount = (start, percent, iteration, final) => {
         monthInput.value = monthAmount.toFixed(2);
     }
 }
+
+function getNewMonths() {
+    let current = Number(monthAmount);
+    let count = 0;
+    do {
+        sum = 0;
+        startAmount = startAmount * (percentAmount / 100 / 12 + 1);
+        current = current * ((percentAmount / 100 / 12) + 1);
+        current += Number(monthAmount);
+        sum = current + startAmount;
+        console.log(sum);
+        count++;
+    } while (sum <= needAmount)
+    return count;
+};
+
+monthInput.addEventListener('input', event => {
+    monthAmount = monthInput.value;
+    console.log(getNewMonths());
+})
