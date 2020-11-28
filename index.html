@@ -57,7 +57,35 @@
       <button class="form__delete">Удалить цель</button>
     </div>
   </div>
-
+  <div id="popup" class="popup">
+    <div class="popup__body">
+      <div class="popup__content">
+        <a href="#header" class="popup__close close-popup"></a>
+        <form action="mail.php" method="POST" class="popup__form">
+          <div class="popup__title">Заказать расчет проекта</div>
+          <div class="popup__subtitle">Опишите цели проекта, задачи и нужный стек разработки, если это важно. Мы
+            рассчитаем
+            примерную стоимость в пределах одного дня</div>
+          <div class="popup__block">
+            <div class="popup__block--item">
+              <input type="text" class="input" name="user-name" placeholder="Имя" required>
+            </div>
+            <div class="popup__block--item">
+              <input type="text" class="input " name="user-phone" placeholder="Номер телефона" required>
+            </div>
+            <div class="popup__block--item">
+              <button class="popup__btn btn " type="submit">Заказать расчет</button>
+            </div>
+            <div class="popup__block--item">
+              <div class="popup__politic">Нажимая кнопку "Заказать расчет", я даю согласие
+                на обработку своих <br><a href="#" class="popup__polinic--link">персональных данных</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="./js/app.js"></script>
 </body>
