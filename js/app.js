@@ -48,7 +48,7 @@ const needHandler = () => {
             monthInput = document.querySelector(`#${number} .month_amount`);
 
             needAmount = needInput.value;
-            startAmount= startInput.value;
+            startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
             updateVarLocalStorage();
@@ -70,7 +70,7 @@ const dateHandler = () => {
             monthInput = document.querySelector(`#${number} .month_amount`);
 
             needAmount = needInput.value;
-            startAmount= startInput.value;
+            startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
             updateVarLocalStorage();
@@ -91,9 +91,9 @@ const startHandler = () => {
             monthInput = document.querySelector(`#${number} .month_amount`);
 
             needAmount = needInput.value;
-            startAmount= startInput.value;
+            startAmount = startInput.value;
             percentAmount = percentInput.value;
-            
+
             daysToTarget(dateInput);
             updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
@@ -113,7 +113,7 @@ const percentPercent = () => {
             monthInput = document.querySelector(`#${number} .month_amount`);
 
             needAmount = needInput.value;
-            startAmount= startInput.value;
+            startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
             updateVarLocalStorage();
@@ -132,7 +132,7 @@ percentPercent();
 function addNewForm() {
     const divForm = document.createElement('div');
     divForm.classList.add('form');
-    divForm.setAttribute("id", 'form-'+num);
+    divForm.setAttribute("id", 'form-' + num);
     divForm.innerHTML = formContent;
     container.prepend(divForm);
     num++;
@@ -140,8 +140,8 @@ function addNewForm() {
     formDeleteButtons.forEach(element => {
         element.addEventListener('click', (e) => {
             e.target.parentElement.remove();
-        });    
-    });    
+        });
+    });
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
     startInputAll = document.querySelectorAll('.start_amount');
@@ -152,46 +152,45 @@ function addNewForm() {
     startHandler();
     percentPercent();
 
-};    
+};
 
 // Удаление первого элемента
-formDelete.addEventListener('click', function (e) {       
+formDelete.addEventListener('click', function (e) {
     e.target.parentElement.remove();
-});    
+});
 
 // добавление формы при клике
 addForm.addEventListener('click', () => {
     addNewForm();
-});    
+});
 
 //вычисление дней цели, целых месяцев до цели, перезаписывание пременной dateTarget;
 const daysToTarget = (dateInput) => {
     let different = 1 + ((new Date(dateInput.value) - new Date()) / 86400000);
     differentDays = Number(different.toFixed());
-    dateTarget = Math.floor(differentDays/30);
+    dateTarget = Math.floor(differentDays / 30);
     return differentDays;
-}    
-
+}
 //вычисление суммы ежемесячного пополнения с учетом капитализации
 const getMonthAmount = (start, percent, iteration, final) => {
-        let percentFinal = 0;
-        percent = percent / 100 / 12 + 1;
-        for (let i = 0; i < iteration; i++) {
-            percentFinal = percentFinal + Math.pow(percent, i+1)
-            start = start * percent;
-        }    
-        monthAmount = (final - start) / percentFinal;
-        if (differentDays < 30) {
-            monthInput.value = 'Доступный срок от 1 месяца'; 
-            console.log(monthInput.value);     
-        } else {
-            monthInput.value = monthAmount.toFixed(2);
-        }
-};  
+    let percentFinal = 0;
+    percent = percent / 100 / 12 + 1;
+    for (let i = 0; i < iteration; i++) {
+        percentFinal = percentFinal + Math.pow(percent, i + 1)
+        start = start * percent;
+    }
+    monthAmount = (final - start) / percentFinal;
+    if (differentDays < 30) {
+        monthInput.value = 'Доступный срок от 1 месяца';
+        console.log(monthInput.value);
+    } else {
+        monthInput.value = monthAmount.toFixed(2);
+    }
+};
 
 //Func вычисления срока накопления в зависимости от введённой суммы пополонения
 function getNewMonths(need, start, percent, amount) {
-    if (!Number(amount)) return; 
+    if (!Number(amount)) return;
     let current = 0;
     let count = 0;
     let sum = 0;

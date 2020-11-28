@@ -17,10 +17,11 @@
 <body>
   <header class="header">
     <button class="add__form">Добавить цель</button>
-    <label>
+    <label class="form__label header__label">
       Сумму, готовую спустить на ништяки
-      <input type="number" class="form__input allowed_amount" />
-    </label>  
+      <input type="number" class="form__input header__input allowed_amount" />
+    </label>
+    <button class="add__form link-open">Нажми для теста</button>
   </header>
   <div class="container">
     <div class="form" id="form-0">
@@ -61,9 +62,19 @@
       <button class="form__delete">Удалить цель</button>
     </div>
   </div>
-
+  <div id="popup" class="popup">
+    <div class="popup__body">
+      <div class="popup__content">
+        <a href="#header" class="popup__close close-popup">X</a>
+        <div class="popup__content--text">
+          <span class="popup__content--descr">Вы исчерпали лимит на няшки!!!</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="./js/app.js"></script>
+  <script src="./js/popup.js"></script>
 </body>
 
 </html>
