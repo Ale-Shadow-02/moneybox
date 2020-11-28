@@ -17,10 +17,11 @@
 <body>
   <header class="header">
     <button class="add__form">Добавить цель</button>
-    <label>
+    <label class="form__label header__label">
       Сумму, готовую спустить на ништяки
-      <input type="number" class="form__input allowed_amount" />
-    </label>  
+      <input type="number" class="form__input header__input allowed_amount" />
+    </label>
+    <button class="add__form link-open">Нажми для теста</button>
   </header>
   <div class="container">
     <div class="form" id="form-0">
@@ -64,34 +65,16 @@
   <div id="popup" class="popup">
     <div class="popup__body">
       <div class="popup__content">
-        <a href="#header" class="popup__close close-popup"></a>
-        <form action="mail.php" method="POST" class="popup__form">
-          <div class="popup__title">Заказать расчет проекта</div>
-          <div class="popup__subtitle">Опишите цели проекта, задачи и нужный стек разработки, если это важно. Мы
-            рассчитаем
-            примерную стоимость в пределах одного дня</div>
-          <div class="popup__block">
-            <div class="popup__block--item">
-              <input type="text" class="input" name="user-name" placeholder="Имя" required>
-            </div>
-            <div class="popup__block--item">
-              <input type="text" class="input " name="user-phone" placeholder="Номер телефона" required>
-            </div>
-            <div class="popup__block--item">
-              <button class="popup__btn btn " type="submit">Заказать расчет</button>
-            </div>
-            <div class="popup__block--item">
-              <div class="popup__politic">Нажимая кнопку "Заказать расчет", я даю согласие
-                на обработку своих <br><a href="#" class="popup__polinic--link">персональных данных</a>
-              </div>
-            </div>
-          </div>
-        </form>
+        <a href="#header" class="popup__close close-popup">X</a>
+        <div class="popup__content--text">
+          <span class="popup__content--descr">Вы исчерпали лимит на няшки!!!</span>
+        </div>
       </div>
     </div>
   </div>
 
   <script src="./js/app.js"></script>
+  <script src="./js/popup.js"></script>
 </body>
 
 </html>

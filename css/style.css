@@ -20,6 +20,9 @@ body {
   max-width: 1200px;
   margin: 0px auto;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .add__form {
@@ -227,7 +230,7 @@ input.percent__input {
 }
 
 .popup__content {
-  background-color: #eff7ff;
+  background-color: #4CD1C0; 
   color: #333333;
   max-width: 800px;
   padding: 85px 65px;
@@ -247,57 +250,9 @@ input.percent__input {
   background-size: cover;
 }
 
-  
-.popup__title {
-  font-family: Gilroy;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 40px;
-  margin: 0px 0px 15px 0px;
 
+.popup__content--text {
+  background: #FFFFFF;
+  padding: 50px 30px;
 }
-
-.poput__subtitle {
-  font-family: Gilroy;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 28px;
-  margin: 0px 0px 50px 0px;
-}
-
-  .poput__block {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 0px -10px;
-  }
-
-.popup__block--item {
-  flex: 1 1 50%;
-  padding: 0px 10px;
-}
-
-
-.popup__politic {
-  color: #999999;
-  font-family: Gilroy;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.popup__politic--link {
-  text-decoration: underline;
-}
-
-.input {
-  background-color: #ffffff;
-  border-radius: 5px;
-  margin: 0px 0px 20px 0px;
-  padding: 25px 25px;
-  width: 100%;
-}
-
-
-  
 
