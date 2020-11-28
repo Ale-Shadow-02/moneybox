@@ -12,15 +12,28 @@ let monthInput = document.querySelector('.month_amount');
 let formDelete = document.querySelector('.form__delete');
 let addForm = document.querySelector('.add__form');
 let container = document.querySelector('.container');
+let allowedInput = document.querySelector('.allowed_amount');
 let differentDays = 1;
 let formContent = form.innerHTML;
-let num = "a";
+let num = 1;
 let needAmount;
 let dateTarget;
 let startAmount;
 let percentAmount;
 let monthAmount;
+let allowedAmount;
 
+needInput.value = localStorage.getItem("needAmount");
+startInput.value = localStorage.getItem("startAmount");
+percentInput.value = localStorage.getItem("percentAmount");
+dateInput.value = localStorage.getItem("dateTarget");
+
+const updateVarLocalStorage = () => {
+    localStorage.setItem("needAmount", needAmount)
+    localStorage.setItem("startAmount", startAmount)
+    localStorage.setItem("percentAmount", percentAmount)
+    localStorage.setItem("dateTarget", dateInput.value)
+}
 //Обработчик need Input
 const needHandler = () => {
     needInputAll.forEach(needInput => {
@@ -36,10 +49,11 @@ const needHandler = () => {
             startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
     });
-}
+};
 
 //Обработчик need date
 const dateHandler = () => {
@@ -57,10 +71,11 @@ const dateHandler = () => {
             startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
-    })
-}
+    });
+};
 
 //Обработчик need start
 const startHandler = () => {
@@ -76,11 +91,13 @@ const startHandler = () => {
             needAmount = needInput.value;
             startAmount = startInput.value;
             percentAmount = percentInput.value;
-            daysToTarget(dateInput)
+
+            daysToTarget(dateInput);
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
-    })
-}
+    });
+};
 
 //Обработчик need percent
 const percentPercent = () => {
@@ -97,10 +114,11 @@ const percentPercent = () => {
             startAmount = startInput.value;
             percentAmount = percentInput.value;
             daysToTarget(dateInput)
+            updateVarLocalStorage();
             getMonthAmount(startAmount, percentAmount, dateTarget, needAmount);
         });
-    })
-}
+    });
+};
 
 needHandler();
 dateHandler();
@@ -112,15 +130,15 @@ percentPercent();
 function addNewForm() {
     const divForm = document.createElement('div');
     divForm.classList.add('form');
-    divForm.setAttribute("id", num);
+    divForm.setAttribute("id", 'form-' + num);
     divForm.innerHTML = formContent;
-    container.append(divForm);
-    num += "a";
+    container.prepend(divForm);
+    num++;
     let formDeleteButtons = document.querySelectorAll('.form__delete');
     formDeleteButtons.forEach(element => {
         element.addEventListener('click', (e) => {
             e.target.parentElement.remove();
-        })
+        });
     });
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
@@ -149,7 +167,6 @@ const daysToTarget = (dateInput) => {
     let different = 1 + ((new Date(dateInput.value) - new Date()) / 86400000);
     differentDays = Number(different.toFixed());
     dateTarget = Math.floor(differentDays / 30);
-    //'Выберите срок накопления от 1 месяца и больше';
     return differentDays;
 }
 //вычисление суммы ежемесячного пополнения с учетом капитализации
@@ -167,24 +184,36 @@ const getMonthAmount = (start, percent, iteration, final) => {
     } else {
         monthInput.value = monthAmount.toFixed(2);
     }
-}
+};
 
-function getNewMonths() {
-    let current = Number(monthAmount);
+function getNewMonths(need, start, percent, amount) {
+    if (!Number(amount)) return;
+    let current = 0;
     let count = 0;
+    let sum = 0;
+    console.log('внутри', Number(current))
     do {
-        sum = 0;
-        startAmount = startAmount * (percentAmount / 100 / 12 + 1);
-        current = current * ((percentAmount / 100 / 12) + 1);
-        current += Number(monthAmount);
-        sum = current + startAmount;
-        console.log(sum);
+        start = start * ((percent / 100 / 12) + 1);
+        current = (Number(current) + Number(amount)) * ((percent / 100 / 12) + 1);
+        sum = current + start;
         count++;
-    } while (sum <= needAmount)
+    } while (sum < need);
+
+    console.log('sum1111', sum);
+    console.log('date', new Date(new Date().getTime() + (86400 * 30 * 1000 * count)));
+    dateInput.value = new Date(new Date().getTime() + (86400 * 30 * 1000 * count)).toISOString().slice(0, 10);
     return count;
 };
 
 monthInput.addEventListener('input', event => {
     monthAmount = monthInput.value;
-    console.log(getNewMonths());
+    console.log('инпут', monthAmount);
+    console.log('счетчик', getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount));
+    getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount)
 })
+
+//let allowedAmount;
+
+allowedInput.addEventListener('input', event => {
+    allowedAmount = allowedInput.value;
+});

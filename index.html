@@ -17,9 +17,13 @@
 <body>
   <header class="header">
     <button class="add__form">Добавить цель</button>
+    <label>
+      Сумму, готовую спустить на ништяки
+      <input type="number" class="form__input allowed_amount" />
+    </label>  
   </header>
   <div class="container">
-    <div class="form" id="b">
+    <div class="form" id="form-0">
       <div class="form__wrap--bg">
         <div class="form__top">
           <h1 class="form__top--title">копилка</h1>
@@ -32,11 +36,11 @@
         <div class="form__wrap">
           <label class="form__label">
             Требуемая сумма
-            <input type="number" class="form__input need_amount" placeholder="0 RUB" />
+            <input type="number" class="form__input need_amount" placeholder="0 RUB" value="" />
           </label>
           <label class="form__label">
             Стартовая сумма
-            <input type="number" class="form__input start_amount" placeholder="0 RUB" />
+            <input type="number" class="form__input start_amount" placeholder="0 RUB" value="" />
           </label>
           <div class="form__wrap--percent">
             <label class="form__label">
