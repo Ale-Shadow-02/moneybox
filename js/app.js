@@ -28,6 +28,8 @@ startInput.value = localStorage.getItem("startAmount");
 percentInput.value = localStorage.getItem("percentAmount");
 dateInput.value = localStorage.getItem("dateTarget");
 
+
+// функция перезаписи переменных в LocalStorage
 const updateVarLocalStorage = () =>{
     localStorage.setItem("needAmount",needAmount)
     localStorage.setItem("startAmount",startAmount)
@@ -169,6 +171,7 @@ const daysToTarget = (dateInput) => {
     dateTarget = Math.floor(differentDays/30);
     return differentDays;
 }    
+
 //вычисление суммы ежемесячного пополнения с учетом капитализации
 const getMonthAmount = (start, percent, iteration, final) => {
         let percentFinal = 0;
@@ -184,27 +187,26 @@ const getMonthAmount = (start, percent, iteration, final) => {
         } else {
             monthInput.value = monthAmount.toFixed(2);
         }
-};        
+};  
 
+//Func вычисления срока накопления в зависимости от введённой суммы пополонения
 function getNewMonths(need, start, percent, amount) {
     if (!Number(amount)) return; 
     let current = 0;
     let count = 0;
     let sum = 0;
-    console.log('внутри', Number(current))
     do {
         start = start * ((percent / 100 / 12) + 1);
         current = (Number(current) + Number(amount)) * ((percent / 100 / 12) + 1);
         sum = current + start;
         count++;
     } while (sum < need);
-    
-    console.log('sum1111', sum);
-    console.log('date', new Date(new Date().getTime() + (86400 * 30 * 1000 * count)));
+
     dateInput.value = new Date(new Date().getTime() + (86400 * 30 * 1000 * count)).toISOString().slice(0,10);
     return count;
 };
 
+//обработчик инпута ввода суммы пополнения
 monthInput.addEventListener('input', event => {
     monthAmount = monthInput.value;
     console.log('инпут', monthAmount);
@@ -217,3 +219,8 @@ monthInput.addEventListener('input', event => {
 allowedInput.addEventListener('input', event => {
     allowedAmount = allowedInput.value;
 });
+
+//расчет месячной суммы пополнения призагрузке страницы на основании данных из
+//из LocalStorage
+(daysToTarget(dateInput))
+getMonthAmount(startInput.value , percentInput.value, dateTarget, needInput.value );
