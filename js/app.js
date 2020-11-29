@@ -227,6 +227,7 @@ openPopup.addEventListener('click', (e) => {
         monthInputSum += Number(el.value);
     });
     if (monthInputSum > allowedAmount) {
+        popupText.innerHTML = 'Вы исчерпали лимит на няшки!!!';
         popupWindow.classList.add('open');
     } else {
         console.log('все ок, бро');
