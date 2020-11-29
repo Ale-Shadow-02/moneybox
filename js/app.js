@@ -182,7 +182,6 @@ const getMonthAmount = (start, percent, iteration, final) => {
     monthAmount = (final - start) / percentFinal;
     if (differentDays < 30) {
         monthInput.value = 'Доступный срок от 1 месяца';
-        console.log(monthInput.value);
     } else {
         monthInput.value = monthAmount.toFixed(2);
     }
@@ -213,10 +212,19 @@ monthInput.addEventListener('input', event => {
     getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount)
 })
 
-//let allowedAmount;
+//попап
+let popupWindow = document.querySelector('#popup');
 
 allowedInput.addEventListener('input', event => {
-    allowedAmount = allowedInput.value;
+    allowedAmount = Number(allowedInput.value);
+    let allMonthInput = document.querySelectorAll('.month_amount');
+    monthInputSum = 0;
+    allMonthInput.forEach(el => {
+        monthInputSum += Number(el.value);
+    });
+    if (monthInputSum > allowedAmount) {
+        popupWindow.classList.add('open');
+    }
 });
 
 //расчет месячной суммы пополнения призагрузке страницы на основании данных из
