@@ -13,6 +13,11 @@ let formDelete = document.querySelector('.form__delete');
 let addForm = document.querySelector('.add__form');
 let container = document.querySelector('.container');
 let allowedInput = document.querySelector('.allowed_amount');
+let popupWindow = document.querySelector('#popup');
+let openPopup = document.querySelector('.link-open');
+let closePopup = document.querySelector('.close-popup');
+let popupBody = document.querySelector('.popup__body');
+let popupText = document.querySelector('.popup__content--descr');
 let differentDays = 1;
 let formContent = form.innerHTML;
 let num = 1;
@@ -213,9 +218,8 @@ monthInput.addEventListener('input', event => {
 })
 
 //попап
-let popupWindow = document.querySelector('#popup');
-
-allowedInput.addEventListener('input', event => {
+openPopup.addEventListener('click', (e) => {
+    e.preventDefault();
     allowedAmount = Number(allowedInput.value);
     let allMonthInput = document.querySelectorAll('.month_amount');
     monthInputSum = 0;
@@ -224,7 +228,28 @@ allowedInput.addEventListener('input', event => {
     });
     if (monthInputSum > allowedAmount) {
         popupWindow.classList.add('open');
+    } else {
+        console.log('все ок, бро');
+        popupText.innerHTML = 'Всё ок, бро, гуляй :)';
+        popupWindow.classList.add('open');
     }
+});
+
+closePopup.addEventListener('click', (e) => {
+  e.preventDefault();
+  popup.classList.remove('open');
+});
+
+popupBody.addEventListener('click', (e) => {
+  if (!e.target.closest('.popup__content')) {
+    popup.classList.remove('open');
+  }
+});
+
+document.addEventListener('keyup', (e) => {
+  if (e.keyCode === 27) {
+    popup.classList.remove('open');
+  }
 });
 
 //расчет месячной суммы пополнения призагрузке страницы на основании данных из
