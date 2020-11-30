@@ -30,10 +30,7 @@ body {
   border: 3px solid #4DD6C4;
   box-shadow: 4px 4px 10px #389488;
   border-radius: 20px;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
+  font: 500 16px/22px 'Roboto';
   text-transform: uppercase;
   color: #FFFFFF;
   padding: 5px 20px;
@@ -61,10 +58,7 @@ body {
 }
 
 .form__top--title {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font: 500 14px/16px 'Roboto';
   letter-spacing: 1em;
   text-transform: uppercase;
   color: #FFFFFF;
@@ -104,10 +98,7 @@ input.name {
 }
 
 input.name::placeholder {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
+  font: 500 11px/13px 'Roboto';
   text-transform: uppercase;
   color: #D1D8E3;
   text-align: center;
@@ -126,10 +117,7 @@ input.name::placeholder {
 }
 
 .form__label {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
+  font: 500 11px/13px 'Roboto';
   text-align: center;
   color: #808080;
 }
@@ -145,10 +133,7 @@ input.name::placeholder {
   }
 
 .form__input::placeholder {
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
+  font: 500 12px/14px 'Roboto';
   color: #D1D8E3;
   text-align: center;
 }
@@ -168,29 +153,39 @@ input.percent__input {
   width: 55px;
 }
 
-.form__delete {
+.button_form {
   background: #010A20;
   border: 1px solid #1D2121;
   box-sizing: border-box;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   border: none;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 9px;
-  line-height: 11px;
+  font: 500 9px/11px 'Roboto';
   text-transform: uppercase;
   color: #FFFFFF;
   padding: 10px 25px;
   position: relative;
   top: -37px;
-  left: 65px;
+  left: 25px;
   transition: all .4;
 }
 
-.form__delete:hover {
+.button_form:hover {
   background: rgb(196, 22, 22);
   transition: all .4;
+}
+
+input:focus {
+  border-color: aqua;
+}
+
+.another_amount {
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+.visible_hidden {
+  visibility: hidden;
 }
 
 /** Стили для модального окна ==================================================*/

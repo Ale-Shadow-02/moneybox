@@ -18,6 +18,7 @@ let openPopup = document.querySelector('.link-open');
 let closePopup = document.querySelector('.close-popup');
 let popupBody = document.querySelector('.popup__body');
 let popupText = document.querySelector('.popup__content--descr');
+//let anotherAmount = document.querySelector('.another_amount');
 let differentDays = 1;
 let formContent = form.innerHTML;
 let num = 1;
@@ -35,7 +36,7 @@ dateInput.value = localStorage.getItem("dateTarget");
 
 
 // функция перезаписи переменных в LocalStorage
-const updateVarLocalStorage = () =>{
+const updateVarLocalStorage = () => {
     localStorage.setItem("needAmount",needAmount)
     localStorage.setItem("startAmount",startAmount)
     localStorage.setItem("percentAmount",percentAmount)
@@ -147,6 +148,34 @@ function addNewForm() {
             e.target.parentElement.remove();
         });
     });
+
+    //события кнопки сохранить/редактировать
+    let formEditAll = document.querySelectorAll('.form__edit');
+    formEditAll.forEach(el => {
+        el.addEventListener('click', (event) => {
+            event.preventDefault();
+            let allInputs = document.querySelectorAll('input');
+        
+            if (el.innerHTML == 'СОХРАНИТЬ') {
+                function addDisabled(element, index, array) {
+                    if (index > 0) {
+                        element.setAttribute('disabled', 'disabled');
+                    }
+                };
+                [...allInputs].forEach(addDisabled);
+                el.innerHTML = 'РЕДАКТИРОВАТЬ';
+            } else {
+                function removeDisabled(element, index, array) {
+                    if (index > 0) {
+                        element.removeAttribute('disabled');
+                    }
+                };
+                [...allInputs].forEach(removeDisabled);
+                el.innerHTML = 'СОХРАНИТЬ';
+            }  
+        });
+    });
+
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
     startInputAll = document.querySelectorAll('.start_amount');
@@ -157,7 +186,33 @@ function addNewForm() {
     startHandler();
     percentPercent();
 
+    //changeMonthAmount();
 };
+
+// Изменение первой кнопки сохранить/редактировать
+let formEdit = document.querySelector('.form__edit');
+formEdit.addEventListener('click', (event) => {
+    event.preventDefault();
+    let allInputs = document.querySelectorAll('input');
+
+    if (formEdit.innerHTML == 'СОХРАНИТЬ') {
+        function addDisabled(element, index, array) {
+            if (index > 0) {
+                element.setAttribute('disabled', 'disabled');
+            }
+        };
+        [...allInputs].forEach(addDisabled);
+        formEdit.innerHTML = 'РЕДАКТИРОВАТЬ';
+    } else {
+        function removeDisabled(element, index, array) {
+            if (index > 0) {
+                element.removeAttribute('disabled');
+            }
+        };
+        [...allInputs].forEach(removeDisabled);
+        formEdit.innerHTML = 'СОХРАНИТЬ';
+    }  
+});
 
 // Удаление первого элемента
 formDelete.addEventListener('click', function (e) {
@@ -212,10 +267,23 @@ function getNewMonths(need, start, percent, amount) {
 //обработчик инпута ввода суммы пополнения
 monthInput.addEventListener('input', event => {
     monthAmount = monthInput.value;
-    console.log('инпут', monthAmount);
-    console.log('счетчик', getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount));
-    getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount)
+    getNewMonths(needInput.value, startInput.value, percentInput.value, monthAmount);
+    //changeMonthAmount();
 })
+
+//информационное сообщение о ежемесячной выплате
+// function changeMonthAmount() {
+//     console.log(monthAmount);
+//     let allInputsOfMonthAm = document.querySelectorAll('month_amount');
+//     console.log(allInputsOfMonthAm);
+//     if (monthAmount === '') {
+//         anotherAmount.classList.add('visible_hidden');
+//     } else {
+//         anotherAmount.classList.remove('visible_hidden');
+//     }
+// };
+
+// changeMonthAmount();
 
 //попап
 openPopup.addEventListener('click', (e) => {
@@ -230,7 +298,6 @@ openPopup.addEventListener('click', (e) => {
         popupText.innerHTML = 'Вы исчерпали лимит на няшки!!!';
         popupWindow.classList.add('open');
     } else {
-        console.log('все ок, бро');
         popupText.innerHTML = 'Всё ок, бро, гуляй :)';
         popupWindow.classList.add('open');
     }
@@ -257,3 +324,7 @@ document.addEventListener('keyup', (e) => {
 //из LocalStorage
 (daysToTarget(dateInput))
 getMonthAmount(startInput.value , percentInput.value, dateTarget, needInput.value );
+
+
+
+
