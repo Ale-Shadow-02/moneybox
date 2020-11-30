@@ -150,27 +150,24 @@ function addNewForm() {
     });
 
     //события кнопки сохранить/редактировать
-    let formEditAll = document.querySelectorAll('.form__edit');
-    formEditAll.forEach(el => {
+    let formEditAll = document.querySelectorAll(`.form__edit`);
+    [...formEditAll].forEach(el => {
+        console.log(el);
+        console.log(`это айди ${num - 1} у элемента`);
         el.addEventListener('click', (event) => {
             event.preventDefault();
-            let allInputs = document.querySelectorAll('input');
-        
+            console.log(`это айди каждой новой формы #form-${String(num - 1)} input`);
+            let allInputs = document.querySelectorAll(`#form-${String(num - 1)} input`);
+            console.log(allInputs);              
             if (el.innerHTML == 'СОХРАНИТЬ') {
-                function addDisabled(element, index, array) {
-                    if (index > 0) {
-                        element.setAttribute('disabled', 'disabled');
-                    }
-                };
-                [...allInputs].forEach(addDisabled);
+                [...allInputs].forEach(elem => {
+                    elem.setAttribute('disabled', 'disabled');
+                })
                 el.innerHTML = 'РЕДАКТИРОВАТЬ';
             } else {
-                function removeDisabled(element, index, array) {
-                    if (index > 0) {
-                        element.removeAttribute('disabled');
-                    }
-                };
-                [...allInputs].forEach(removeDisabled);
+                [...allInputs].forEach(elem => {
+                    elem.removeAttribute('disabled', 'disabled');
+                })
                 el.innerHTML = 'СОХРАНИТЬ';
             }  
         });
@@ -190,26 +187,21 @@ function addNewForm() {
 };
 
 // Изменение первой кнопки сохранить/редактировать
-let formEdit = document.querySelector('.form__edit');
+let formEdit = document.querySelector('#form-0 .form__edit');
 formEdit.addEventListener('click', (event) => {
     event.preventDefault();
-    let allInputs = document.querySelectorAll('input');
-
+    console.log(formEdit);
+    let allInputsFirstForm = document.querySelectorAll(`#form-0 input`);
+    console.log(allInputsFirstForm);
     if (formEdit.innerHTML == 'СОХРАНИТЬ') {
-        function addDisabled(element, index, array) {
-            if (index > 0) {
-                element.setAttribute('disabled', 'disabled');
-            }
-        };
-        [...allInputs].forEach(addDisabled);
+        [...allInputsFirstForm].forEach(el => {
+            el.setAttribute('disabled', 'disabled');
+        });
         formEdit.innerHTML = 'РЕДАКТИРОВАТЬ';
     } else {
-        function removeDisabled(element, index, array) {
-            if (index > 0) {
-                element.removeAttribute('disabled');
-            }
-        };
-        [...allInputs].forEach(removeDisabled);
+        [...allInputsFirstForm].forEach(el => {
+            el.removeAttribute('disabled', 'disabled');
+        });
         formEdit.innerHTML = 'СОХРАНИТЬ';
     }  
 });
