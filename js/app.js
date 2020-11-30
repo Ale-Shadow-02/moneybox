@@ -150,28 +150,63 @@ function addNewForm() {
     });
 
     //события кнопки сохранить/редактировать
-    let formEditAll = document.querySelectorAll(`.form__edit`);
-    [...formEditAll].forEach(el => {
-        console.log(el);
-        console.log(`это айди ${num - 1} у элемента`);
-        el.addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log(`это айди каждой новой формы #form-${String(num - 1)} input`);
-            let allInputs = document.querySelectorAll(`#form-${String(num - 1)} input`);
-            console.log(allInputs);              
+    // let formEditAll = document.querySelectorAll(`#form-${String(num - 1)} .form__edit`);
+    // [...formEditAll].forEach(el => {
+    //     console.log(el);
+    //     console.log(`это айди ${num - 1} у элемента`);
+    //     el.addEventListener('click', (event) => {
+    //         event.preventDefault();
+    //         let targer = event.target;
+    //         console.log(targer);
+    //         console.log(`это айди каждой новой формы #form-${String(num - 1)} input`);
+    //         let allInputs = document.querySelectorAll(`#form-${String(num - 1)} input`);
+    //         console.log(allInputs);              
+    //         if (el.innerHTML == 'СОХРАНИТЬ') {
+    //             [...allInputs].forEach(elem => {
+    //                 elem.setAttribute('disabled', 'disabled');
+    //             })
+    //             el.innerHTML = 'РЕДАКТИРОВАТЬ';
+    //         } else {
+    //             [...allInputs].forEach(elem => {
+    //                 elem.removeAttribute('disabled', 'disabled');
+    //             })
+    //             el.innerHTML = 'СОХРАНИТЬ';
+    //         }  
+    //     });
+    // });
+
+    // ИСПРАВЛЕННЫЙ ВАРИАНТ УЖЕ ЛУЧШЕ, НО ВСЕ РАВНО ОТСТОЙ
+    let allInputs = document.querySelectorAll('input');
+    let allInputsWithoutFirst = [...allInputs].length - 6;
+
+    function addDisabled(el, index, arr) {
+        if ((index > 0) && (index < allInputsWithoutFirst)) {
+            console.log(el);
+            el.setAttribute('disabled', 'disabled');
+        }
+    };
+
+    function removeDisabled(el, index, arr) {
+        if ((index > 0) && (index < allInputsWithoutFirst)) {
+            console.log(el);
+            el.removeAttribute('disabled', 'disabled');
+        }
+    };
+    
+    let formEditAll = document.querySelectorAll('.form__edit');
+
+    formEditAll.forEach(el => {
+        el.addEventListener('click', elem => {
             if (el.innerHTML == 'СОХРАНИТЬ') {
-                [...allInputs].forEach(elem => {
-                    elem.setAttribute('disabled', 'disabled');
-                })
+                [...allInputs].forEach(addDisabled);
                 el.innerHTML = 'РЕДАКТИРОВАТЬ';
             } else {
-                [...allInputs].forEach(elem => {
-                    elem.removeAttribute('disabled', 'disabled');
-                })
-                el.innerHTML = 'СОХРАНИТЬ';
-            }  
+                [...allInputs].forEach(removeDisabled);
+                el.innerHTML == 'СОХРАНИТЬ'
+            }        
         });
     });
+
 
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
@@ -316,7 +351,3 @@ document.addEventListener('keyup', (e) => {
 //из LocalStorage
 (daysToTarget(dateInput))
 getMonthAmount(startInput.value , percentInput.value, dateTarget, needInput.value );
-
-
-
-
