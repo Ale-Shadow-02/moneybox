@@ -18,6 +18,7 @@ let openPopup = document.querySelector('.link-open');
 let closePopup = document.querySelector('.close-popup');
 let popupBody = document.querySelector('.popup__body');
 let popupText = document.querySelector('.popup__content--descr');
+let formEditAll = document.querySelectorAll('.form__edit');
 //let anotherAmount = document.querySelector('.another_amount');
 let differentDays = 1;
 let formContent = form.innerHTML;
@@ -134,6 +135,7 @@ startHandler();
 percentPercent();
 
 
+
 // функция добавления новой формы
 function addNewForm() {
     const divForm = document.createElement('div');
@@ -143,70 +145,15 @@ function addNewForm() {
     container.prepend(divForm);
     num++;
     let formDeleteButtons = document.querySelectorAll('.form__delete');
+    formEditAll = document.querySelectorAll('.form__edit');
     formDeleteButtons.forEach(element => {
         element.addEventListener('click', (e) => {
             e.target.parentElement.remove();
         });
     });
 
-    //события кнопки сохранить/редактировать
-    // let formEditAll = document.querySelectorAll(`#form-${String(num - 1)} .form__edit`);
-    // [...formEditAll].forEach(el => {
-    //     console.log(el);
-    //     console.log(`это айди ${num - 1} у элемента`);
-    //     el.addEventListener('click', (event) => {
-    //         event.preventDefault();
-    //         let targer = event.target;
-    //         console.log(targer);
-    //         console.log(`это айди каждой новой формы #form-${String(num - 1)} input`);
-    //         let allInputs = document.querySelectorAll(`#form-${String(num - 1)} input`);
-    //         console.log(allInputs);              
-    //         if (el.innerHTML == 'СОХРАНИТЬ') {
-    //             [...allInputs].forEach(elem => {
-    //                 elem.setAttribute('disabled', 'disabled');
-    //             })
-    //             el.innerHTML = 'РЕДАКТИРОВАТЬ';
-    //         } else {
-    //             [...allInputs].forEach(elem => {
-    //                 elem.removeAttribute('disabled', 'disabled');
-    //             })
-    //             el.innerHTML = 'СОХРАНИТЬ';
-    //         }  
-    //     });
-    // });
-
-    // ИСПРАВЛЕННЫЙ ВАРИАНТ УЖЕ ЛУЧШЕ, НО ВСЕ РАВНО ОТСТОЙ
-    let allInputs = document.querySelectorAll('input');
-    let allInputsWithoutFirst = [...allInputs].length - 6;
-
-    function addDisabled(el, index, arr) {
-        if ((index > 0) && (index < allInputsWithoutFirst)) {
-            console.log(el);
-            el.setAttribute('disabled', 'disabled');
-        }
-    };
-
-    function removeDisabled(el, index, arr) {
-        if ((index > 0) && (index < allInputsWithoutFirst)) {
-            console.log(el);
-            el.removeAttribute('disabled', 'disabled');
-        }
-    };
     
-    let formEditAll = document.querySelectorAll('.form__edit');
-
-    formEditAll.forEach(el => {
-        el.addEventListener('click', elem => {
-            if (el.innerHTML == 'СОХРАНИТЬ') {
-                [...allInputs].forEach(addDisabled);
-                el.innerHTML = 'РЕДАКТИРОВАТЬ';
-            } else {
-                [...allInputs].forEach(removeDisabled);
-                el.innerHTML == 'СОХРАНИТЬ'
-            }        
-        });
-    });
-
+    
 
     needInputAll = document.querySelectorAll('.need_amount');
     dateInputAll = document.querySelectorAll('.date');
@@ -218,37 +165,53 @@ function addNewForm() {
     startHandler();
     percentPercent();
 
-    //changeMonthAmount();
 };
 
-// Изменение первой кнопки сохранить/редактировать
-let formEdit = document.querySelector('#form-0 .form__edit');
-formEdit.addEventListener('click', (event) => {
+//функция кнопки сохранить/редактировать
+function inputsDisabled(event) {
     event.preventDefault();
-    console.log(formEdit);
-    let allInputsFirstForm = document.querySelectorAll(`#form-0 input`);
-    console.log(allInputsFirstForm);
-    if (formEdit.innerHTML == 'СОХРАНИТЬ') {
-        [...allInputsFirstForm].forEach(el => {
+    console.log('event',event.target.parentElement.getAttribute('id'));
+    let id = event.target.parentElement.getAttribute('id');
+    let allInputsFirstForm = document.querySelectorAll(`#${id} input`);
+    let butEdit = document.querySelector(`#${id} .form__edit`)
+    console.log('butEdit', butEdit.innerText)
+    if (butEdit.innerText === 'СОХРАНИТЬ') {
+        allInputsFirstForm.forEach(el => {
             el.setAttribute('disabled', 'disabled');
         });
-        formEdit.innerHTML = 'РЕДАКТИРОВАТЬ';
+         butEdit.innerText = 'РЕДАКТИРОВАТЬ';
     } else {
-        [...allInputsFirstForm].forEach(el => {
-            el.removeAttribute('disabled', 'disabled');
+        allInputsFirstForm.forEach(el => {
+            el.removeAttribute('disabled');
         });
-        formEdit.innerHTML = 'СОХРАНИТЬ';
+            butEdit.innerText = 'СОХРАНИТЬ';
     }  
-});
+}
+// Добавление Обработчика события кнопки сохранить/редактировать
+const savedForm = ()=>{
+    formEditAll.forEach((formEdit)=>{
+        formEdit.addEventListener('click', inputsDisabled );
+    })
+}
 
-// Удаление первого элемента
+// Удаление Обработчика события кнопки сохранить/редактировать
+const removeListener = () =>{
+    formEditAll.forEach((formEdit)=>{
+        formEdit.removeEventListener('click', inputsDisabled);
+    })
+}
+savedForm();
+
+// Удаление первого элемента Forom
 formDelete.addEventListener('click', function (e) {
     e.target.parentElement.remove();
 });
 
 // добавление формы при клике
 addForm.addEventListener('click', () => {
+    removeListener();
     addNewForm();
+    savedForm();
 });
 
 //вычисление дней цели, целых месяцев до цели, перезаписывание пременной dateTarget;

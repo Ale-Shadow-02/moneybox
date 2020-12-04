@@ -176,7 +176,7 @@ input.percent__input {
 }
 
 input:focus {
-  border-color: aqua;
+  background-color: #FFFccF;
 }
 
 .another_amount {
